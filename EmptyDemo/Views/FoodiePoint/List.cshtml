@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Item>
+
+
+<p class="display-4">Check out the latest Items!</p>
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <partial name="_ItemPartial" model="item" />
+    }
+</div>

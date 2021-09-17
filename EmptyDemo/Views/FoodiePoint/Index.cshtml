@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CategoryList>
+
+<p class="display-4">Check out the latest Categories!</p>
+<hr />
+<table class="table table-hover">
+    @foreach (var category in Model)
+    {
+
+        <tr>
+            <td>@category.CategoryName</td>
+        </tr>
+    }
+</table>

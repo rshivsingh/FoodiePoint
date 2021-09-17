@@ -1,0 +1,46 @@
+﻿@model Item
+
+
+<h2> @Model.ItemName</h2>
+<div style="padding:5px;">
+    <img src="@Model.ImageURL" style="width:500px; height:350px;" />
+</div>
+@{ 
+    var special = "No";
+    if (Model.IsSpecial)
+        special = "Yes";
+}
+<div style="padding:5px;">
+    <strong>Special: </strong> @special
+</div>
+<div style="padding:5px;">
+    <strong>Description: </strong> @Model.ItemDescription
+</div>
+<div style="padding:5px;">
+    <strong>Contents: </strong> @Model.Contents
+</div>
+@{ 
+    var avail = "No";
+    if (Model.IsDiscAvail)
+        avail = "Yes";
+}
+<div style="padding:5px;">
+    <strong>Discount Available: </strong> @avail
+</div>
+<div style="padding:5px;">
+    <strong>Discount Percent: </strong> @Model.DiscPer%
+</div>
+<div style="padding:5px;">
+    <strong>Price: </strong> &#8377 @Model.Price
+</div>
+@{
+    var x = (1.0 - Model.DiscPer / 100.0);
+    var discPrice = x * Model.Price;
+}
+<div style="padding:5px;">
+    <strong>Discounted Price: </strong> &#8377 @discPrice
+</div>
+
+<div style="padding:5px;">
+    <a asp-controller="Cart" asp-action="AddToCart" asp-route-ItemId="@Model.ItemId" target="_blank" class="btn btn-success btn-sm">Add to Cart</a>
+</div>

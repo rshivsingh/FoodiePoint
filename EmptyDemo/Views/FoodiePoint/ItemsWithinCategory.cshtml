@@ -1,0 +1,10 @@
+﻿@model CategoryViewModel
+
+<p class="display-4">Items Within @Model.Category</p>
+<hr />
+<div class="row">
+    @foreach (var item in Model.Items)
+    {
+        <partial name="_ItemPartial" model="item" />
+    }
+</div>

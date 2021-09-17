@@ -1,0 +1,61 @@
+﻿@model ShoppingCartViewModel
+
+<div style="padding-top:80px">
+    <h2>Here's Your Shopping Cart!</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+                <th>Discount Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+            {
+            <tr>
+                <td class="text-left">
+                    @item.Item.ItemName
+                </td>
+                <td class="text-right">
+                    &#8377 @item.Item.Price
+                </td>
+                <td class="text-center"> <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-ItemId="@item.ItemRef"><i class="fa fa-minus-square"></i></a> 
+                    <span>@item.Quantity</span>
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-ItemId="@item.ItemRef"><i class="fa fa-plus-square"></i></a>
+                </td>
+                <td class="text-right">&#8377 @((item.Quantity * item.Item.Price))</td>
+                <td class="text-right">&#8377 @((item.Quantity * item.Item.Price)-(item.Item.DiscPer/100.0)* item.Quantity *item.Item.Price)</td>
+            </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                <td class="text-right">
+                    <strong>&#8377 @Model.ShoppingCartTotal</strong>  
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            @if (Model.ShoppingCart.ShoppingCartItems.Count() == 0)
+            {
+                <a asp-controller="Cart" asp-action="ClearCart" target="_blank" class="btn btn-danger disabled btn-sm">Clear Cart</a>
+                <a asp-controller="Order" asp-action="Index" target="_blank" class="btn btn-success disabled btn-sm">Order Now!</a>
+            }
+            else
+            {
+                <a asp-controller="Cart" asp-action="ClearCart" target="_blank" class="btn btn-danger  btn-sm">Clear Cart</a>
+                <a asp-controller="Order" asp-action="Index" target="_blank" class="btn btn-success  btn-sm">Order Now!</a>
+            }
+        </div>
+    </div>
+   
+</div>
